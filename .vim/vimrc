@@ -1,0 +1,57 @@
+
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+set ignorecase smartcase
+set incsearch
+set tabstop=8
+set expandtab
+set number
+set shiftwidth=2 " or whatever
+set smarttab autoindent
+" au BufWritePost *.go silent! !gotags -f "tags" -R * &
+
+au Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
+" au Filetype go nnoremap <leader>s :sp <CR>:exe "GoDef"<CR>
+" au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
+au VimEnter * NERDTreeToggle
+map <C-n> :NERDTreeToggle<CR>
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> hh <C-w>s
+nnoremap <silent> nn <C-w>n
+"map <C-t> :TagbarToggle<CR>
+"map <C-]> :GoDef<CR>
+
+let g:SuperTabDefaultCompletionType = "context"
+
+"" the Fmt command gives an error. Check later
+" autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+
